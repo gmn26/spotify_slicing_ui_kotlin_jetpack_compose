@@ -1,5 +1,7 @@
 package com.gmn26.spotifyslicinguikotlinjetpackcompose.ui.components
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,9 +20,11 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.ui.res.painterResource
 
 data class Album(
-    val title: String
+    val title: String,
+    @DrawableRes val imageRes: Int
 )
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -65,7 +69,13 @@ fun MiniAlbumGridItem(
                     .size(50.dp)
                     .clip(RoundedCornerShape(4.dp))
                     .background(Color.Gray)
-            )
+            ) {
+                Image(
+                    painter = painterResource(id = album.imageRes),
+                    contentDescription = "Album Picture",
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
 
             Text(
                 text = album.title,
